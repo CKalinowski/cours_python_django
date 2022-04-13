@@ -20,6 +20,8 @@ class Cursus(models.Model):
     null=True,
     default='0000-00001'
   )
+  class Meta :
+    verbose_name_plural = "Cursus"
 
 class Student(models.Model):
   first_name = models.CharField(
@@ -69,4 +71,7 @@ class Student(models.Model):
     on_delete=models.CASCADE, # necessaire selon la version de Django
     null=True
   )
+
+def __str__(self):    
+  return '{} {} : {}'.format(self.email,self.year_from_bac,self.scholar_year)
 
