@@ -19,9 +19,12 @@ class Cursus(models.Model):
     blank=False,
     null=True,
     default='0000-00001'
-  )
-  class Meta :
+  )  
+  def __str__(self):
+    return '{} {}: {}'.format(self.name,self.year_from_bac,self.scholar_year)
+  class Meta:
     verbose_name_plural = "Cursus"
+
 
 class Student(models.Model):
   first_name = models.CharField(
@@ -29,11 +32,14 @@ class Student(models.Model):
     blank=False,
     null=False
   )
+
   birth_date = models.DateField(
     verbose_name='date of birth',
     blank=False,
-    null=True
+    null=False,
+    default="1980-01-01"
   )
+
   last_name = models.CharField(
     verbose_name="lastname",
     help_text="last name of the student",
@@ -42,6 +48,7 @@ class Student(models.Model):
     default="???",
     max_length=255, # taille maximale du champ
   )
+
   phone = models.CharField(
     verbose_name="phonenumber",
     help_text="phone number of the student",
@@ -50,6 +57,7 @@ class Student(models.Model):
     default="0999999999",
     max_length=10, # taille maximale du champ
   )
+
   email = models.EmailField(
     verbose_name="email",
     help_text="phone number of the student",
@@ -58,6 +66,7 @@ class Student(models.Model):
     default="x@y.z",
     max_length=255, # taille maximale du champ
   )
+
   comments = models.CharField(
     verbose_name="comments",
     help_text="some comments about the student",
@@ -66,12 +75,9 @@ class Student(models.Model):
     default="",
     max_length=255, # taille maximale du champ
   )
+
   cursus = models.ForeignKey(
     Cursus,
     on_delete=models.CASCADE, # necessaire selon la version de Django
     null=True
   )
-
-def __str__(self):    
-  return '{} {} : {}'.format(self.email,self.year_from_bac,self.scholar_year)
-
