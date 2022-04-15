@@ -11,8 +11,17 @@ from lycee.templates.lycee.forms import StudentForm
 
 
 def detail(request,cursus_id):
-    resp = 'result for cursus {}'.format(cursus_id)
-    return HttpResponse(resp)
+    cursus = Cursus.objects.get(pk=cursus_id)
+    result_list = Student.objects.filter(cursus_id=cursus_id)
+
+    context = {
+        'cursus': cursus,
+        'liste': result_list,
+    }
+
+    return render(request, 'lycee/cursus/liste_student.html', context)
+    #resp = 'result for cursus {}'.format(result_list)
+    #return HttpResponse(resp)
 
 def detail_student(request, student_id):
     result_list = Student.objects.get(pk=student_id)

@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 class Cursus(models.Model):
   name = models.CharField(
@@ -37,7 +38,7 @@ class Student(models.Model):
     verbose_name='date of birth',
     blank=False,
     null=False,
-    default="1980-01-01"
+    default="2000-01-01"
   )
 
   last_name = models.CharField(

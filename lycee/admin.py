@@ -1,6 +1,6 @@
 from django.contrib import admin
-
-from .models import Student, Cursus
+from lycee.models import Student,Cursus
+from datetime import datetime
 
 class StudentAdmin(admin.ModelAdmin):
   list_display = ("first_name", "last_name", "email", "phone")
