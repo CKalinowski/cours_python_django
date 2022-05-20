@@ -1,29 +1,24 @@
 {% extends 'master.html' %}
-{% load static %}
-{%if liste%}
+{% if liste %}
   {% block title %}
-    detail of call of row
+    Create particular call of roll
   {% endblock %}
+  
   {% block content %}
-    <div class="container">
-      <div class="row"><h3>Absent</h3></div>
-      {% for student in Absent_list %}
-          <div class="row">
-            <div class='col-sm-2'>
-              {{student.first_name}} {{student.last_name}}
-            </div>
-          </div>
-      {% endfor %}
-      <div class="row"><h3>Present</h3></div>
-      {% for student in Present_list %}
-          <div class="row">
-            <div class='col-sm-2'>
-              {{student.first_name}} {{student.last_name}}
-            </div>
-          </div>
-      {% endfor %}
-    </div>
-    {% endblock %}
-    {% else %}
+    <form method="POST">
+      Select date and check if student is missing
+      {% csrf_token %}
+      {{form.as_p}}
+      <div class="buttons">
+        <button class="btn btn-primary radius left" type='cancel'>
+          <a href={% url 'index' %}>Cancel</a>
+        </button>
+        <button class="btn btn-success radius right" type='submit'>
+          Submit
+        </button>
+      </div>
+    </form>
+  {% endblock %}
+  {% else %}
     <p>No Cursus to show</p>
-    {% endif %}
+  {% endif %}
