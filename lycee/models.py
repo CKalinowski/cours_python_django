@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 
+# Create your models here.
+
 class Cursus(models.Model):
   name = models.CharField(
     max_length=50,
@@ -25,6 +27,9 @@ class Cursus(models.Model):
   def __str__(self):
     return'{} {}'.format (self.name,self.scholar_year)
 
+  #class Meta:
+    #¶verbose_name_plural = 'Cursus'
+
 
 class Student(models.Model):
   first_name = models.CharField(
@@ -40,38 +45,38 @@ class Student(models.Model):
   last_name = models.CharField(
     verbose_name="lastname",
     help_text="last name of the student",
-    blank=False,
-    null=False, 
+    blank=False, # pas de champ vide
+    null=False, # pas de champ null (a conjuguer avec default
     default="???",
-    max_length=255,
+    max_length=255, # taille maximale du champ
   )
   phone = models.CharField(
     verbose_name="Phone number",
     help_text="phone number of the student",
-    blank=False, 
-    null=False, 
+    blank=False, # pas de champ vide
+    null=False, # pas de champ null (a conjuguer avec default
     default="0999999999",
-    max_length=10,
+    max_length=10, # taille maximale du champ
   )
   email = models.EmailField(
     verbose_name="Email",
     help_text="",
-    blank=False, 
-    null=False,
+    blank=False, # pas de champ vide
+    null=False, # pas de champ null (a conjuguer avec default
     default="x@y.z",
-    max_length=255,
+    max_length=255, # taille maximale du champ
   )
   comments = models.CharField(
     verbose_name="comments",
     help_text="some comments about the student",
     blank=True,
-    null=False, 
+    null=False, # pas de champ null (a conjuguer avec default
     default="",
-    max_length=255, 
+    max_length=255, # taille maximale du champ
   )
   cursus = models.ForeignKey(
     Cursus,
-    on_delete=models.CASCADE, 
+    on_delete=models.CASCADE, # necessaire selon la version de Django
     null=True
   )
 
@@ -81,8 +86,8 @@ class Student(models.Model):
 class Presence(models.Model):
   date = models.DateField(
     verbose_name="Date of call",
-    blank=False,
-    null=False,
+    blank=False, # pas de champ vide
+    null=False, # pas de champ null (a conjuguer avec default
   )
 
   isMissing = models.BooleanField(
@@ -93,14 +98,14 @@ class Presence(models.Model):
   reason = models.CharField(
     verbose_name="Reason",
     help_text="Raison de l'absence",
-    blank=False, 
-    null=False, 
+    blank=False, # pas de champ vide
+    null=False, # pas de champ null a conjuguer avec default
     default="",
-    max_length=255, 
+    max_length=255, # taille maximale du champ
   )
   cursus = models.ForeignKey(
     Cursus,
-    on_delete=models.CASCADE, 
+    on_delete=models.CASCADE, # necessaire selon la version de Django
     null=True,
   )
   student =  models.ManyToManyField(
@@ -116,8 +121,8 @@ class Presence(models.Model):
 class ParticularPresence(models.Model):
   date = models.DateField(
     verbose_name="Date of call",
-    blank=False, 
-    null=False, 
+    blank=False, # pas de champ vide
+    null=False, # pas de champ null (a conjuguer avec default
   )
 
   isMissing = models.BooleanField(
@@ -127,19 +132,19 @@ class ParticularPresence(models.Model):
   reason = models.CharField(
     verbose_name="Reason",
     help_text="Raison de l'absence",
-    blank=False, 
-    null=False, 
+    blank=False, # pas de champ vide
+    null=False, # pas de champ null a conjuguer avec default
     default="",
-    max_length=255, 
+    max_length=255, # taille maximale du champ
   )
   cursus = models.ForeignKey(
     Cursus,
-    on_delete=models.CASCADE, 
+    on_delete=models.CASCADE, # necessaire selon la version de Django
     null=True,
   )
   student =  models.ForeignKey(
     Student,
-    on_delete=models.CASCADE, 
+    on_delete=models.CASCADE, # necessaire selon la version de Django
     null=True,
   )
 

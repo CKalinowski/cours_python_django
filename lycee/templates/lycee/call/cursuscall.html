@@ -8,6 +8,8 @@
     <form method="POST">
       Select date and check if student is missing
       {% csrf_token %}
+      <!-- cross site request forgeries -->
+      <!-- https://docs.djangoproject.com/fr/3.1/ref/crsf/ -->
       {{form.as_p}}
       <div class="buttons">
         <button class="btn btn-primary radius left" type='cancel'>

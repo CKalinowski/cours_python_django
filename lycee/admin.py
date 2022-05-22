@@ -1,7 +1,7 @@
 from django.contrib import admin
-from lycee.models import Student,Cursus, Presence
-from datetime import datetime
 
+# Register your models here.
+from .models import Student, Cursus, Presence
 
 class StudentAdmin(admin.ModelAdmin):
   list_display = ("first_name", "last_name", "email", "phone","cursus")
